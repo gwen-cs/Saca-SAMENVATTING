@@ -1,0 +1,67 @@
+#------------------------
+# werken met ('utf-8')
+#------------------------
+
+ascii_string = "foobar"
+non_ascii_string = " → "
+
+ascii_bytes = ascii_string.encode("utf-8")
+non_ascii_bytes = non_ascii_string.encode("utf-8")
+
+print (ascii_bytes.decode('utf-8'))
+print(non_ascii_bytes.decode('utf-8'))
+
+#------------------------
+# werken met bestanden
+#------------------------
+
+with open("demo.txt", "w") as fp:
+    fp.write("Hallo Gwen")
+    # maakt een document aan met de naam demo.txt en zet daar text in "Hallo Gwen"
+
+# opvragen van bestanden (niet voor grote bestanden)
+
+with open("demo.txt", 'r') as fp:
+    content = fp.read()
+    # opened het document aan met de naam demo.txt en zet daar hele document in
+    content = fp.readline()
+    # opened het document aan met de naam demo.txt en zet daar de eerste regel in
+
+# opvragen van bestanden (voor grote bestanden)
+
+# Optie 1: met readline() en een while-lus
+with open("demo.txt", 'r') as fp:
+    line = fp.readline()
+    while line:
+        print(line, end='')
+        line = fp.readline()
+
+# Optie 2: direct itereren over het bestandsobject
+with open("demo.txt", 'r') as fp:
+    for line in fp:
+        print(line.strip())
+
+
+# "r"   read   ==>  Als het bestand niet bestaat, treedt er een fout op
+# "w"   write  ==>  Als het bestand al bestaat, wordt de inhoud gewist (overschreven).
+#                   Als het bestand niet bestaat, wordt er een nieuw bestand aangemaakt.
+# "x"   create ==>  Opent het bestand voor exclusieve creatie.
+#                   Als het bestand al bestaat, treedt er een fout op.
+# "a"   Append ==>  Opent het bestand om te schrijven.
+#                   Als het bestand bestaat, wordt nieuwe data achteraan het bestand toegevoegd (appended).
+#                   Als het bestand niet bestaat, wordt er een nieuw bestand aangemaakt.
+# "b"   read    ==> Opent het bestand in binaire modus. Lezen en schrijven van/naar het bestand gebeurt in bytes.
+# "t"   read    ==> Opent het bestand in tekstmodus.
+#                   Lezen en schrijven van/naar het bestand gebeurt in strings. (standaard)
+
+# Methode 1: write() gebruiken (voegt automatisch GEEN nieuwe regel \n toe)
+with open("demo.txt", 'a') as fp:
+    fp.write("Awesome, I can append a file")
+
+# Methode 2: writelines() gebruiken voor een lijst van regels
+with open("demo.txt", 'a') as fp:
+    fp.writelines(["look I'm a\n", "list\n"])
+
+# Methode 3: print() omleiden met de parameter file=fp
+with open("demo.txt", 'a') as fp:
+    print("Now a newlines is automatically added (look at the default value of end parameter in print definition)", file=fp)
