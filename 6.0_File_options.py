@@ -65,3 +65,28 @@ with open("demo.txt", 'a') as fp:
 # Methode 3: print() omleiden met de parameter file=fp
 with open("demo.txt", 'a') as fp:
     print("Now a newlines is automatically added (look at the default value of end parameter in print definition)", file=fp)
+
+# een pad opbouwen
+
+import os
+path = "/etc/ssh/sshd_config" # gewoon als tekst (strings)
+path = os.path.join("/etc", "ssh", "sshd_config") # gebruikt het juiste scheidingsteken voor het huidige besturingssysteem
+
+from pathlib import Path
+p = Path("/etc")
+p = p / "ssh" / "sshd_config"
+
+# Bestandssysteemoperaties
+
+#   Omschrijving	                    Python-code	                    Linux CLI equivalent
+#   Huidige werkmap ophalen	            os.getcwd()	                    pwd
+#   Huidige werkmap wijzigen            os.chdir("/tmp")	            cd /tmp
+#   Map aanmaken	                    os.mkdir("/tmp/tst")	        mkdir /tmp/tst
+#   Map aanmaken, inclusief 	        os.makedirs("/tmp/tst/a/b/c")	mkdir -p /tmp/tst/a/b/c
+#       ontbrekende submappen
+#   Bestand/map statistieken ophalen	os.stat("/tmp/tst")	            stat /tmp/tst
+#   Bestandsmodus (rechten) wijzigen	os.chmod("/tmp/tst", 0o600)	    chmod 600 /tmp/tst
+#   Bestandseigenaar wijzigen	        os.chown("/tmp/tst", 33, 33)	chown www-data:www-data /tmp/tst
+#   Bestand verwijderen	                os.remove("/tmp/tst/file")	    rm /tmp/tst/file
+#   Lege map verwijderen	            os.rmdir("/tmp/tst/a/b/c")	    rmdir /tmp/tst/a/b/c
+#   Niet-lege map verwijderen	        shutil.rmtree("/tmp/tst/a")	    rm -r /tmp/tst/a
